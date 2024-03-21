@@ -47,3 +47,7 @@ To execute the tests, run the following command:
 ```bash
 mvn test
 ```
+
+## Note
+
+If you use an IDE that supports Maven (e.g. IntelliJ IDEA), you can easily compile, run and test the application.
