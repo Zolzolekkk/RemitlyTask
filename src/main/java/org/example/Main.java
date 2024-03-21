@@ -21,21 +21,53 @@ public class Main {
         return Thread.currentThread().getContextClassLoader().getResourceAsStream( path );
     }
 
+    private static boolean isIAMRolePolicyFormat(JsonNode rootNode) {
+        // Check if JSON contains required fields for IAM Role policy
+        boolean hasVersion = rootNode.has("Version");
+        boolean hasStatement = rootNode.has("Statement");
+
+        // If any required field is missing, return false
+        return hasVersion && hasStatement;
+    }
+
+    private static boolean isValidStatement(JsonNode statementNode) {
+        // Check if each statement has required fields (Effect, Action, Resource)
+        boolean hasEffect = statementNode.has("Effect");
+        boolean hasAction = statementNode.has("Action");
+        boolean hasResource = statementNode.has("Resource");
+
+        return hasEffect && hasAction && hasResource;
+    }
+
     // Method to get the resource node from the JSON object
     private static JsonNode getResourceNode(JsonNode rootNode) {
         JsonNode policyDocumentNode = rootNode.at(POLICY_DOCUMENT);
 
         JsonNode statementNode;
         if (!policyDocumentNode.isMissingNode()) {
+            if (!isIAMRolePolicyFormat(policyDocumentNode)) {
+                throw new IllegalArgumentException("Policy document is not in IAM Role policy format");
+            }
             statementNode = policyDocumentNode.at(STATEMENT);
         } else {
+            if (!isIAMRolePolicyFormat(rootNode)) {
+                throw new IllegalArgumentException("Policy document is not in IAM Role policy format");
+            }
             statementNode = rootNode.at(STATEMENT);
         }
 
         JsonNode resourceNode;
         if (statementNode.isArray()) {
+            for (JsonNode node : statementNode) {
+                if (!isValidStatement(node)) {
+                    throw new IllegalArgumentException("Statement field is not in valid format");
+                }
+            }
             resourceNode = statementNode.at(FIRST_RESOURCE);
         } else {
+            if (!isValidStatement(statementNode)) {
+                throw new IllegalArgumentException("Statement field is not in valid format");
+            }
             resourceNode = statementNode.at(RESOURCE);
         }
         if (resourceNode.isMissingNode()) {

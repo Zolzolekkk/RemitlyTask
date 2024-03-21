@@ -145,4 +145,13 @@ public class JSONVerifierTest {
         // Then
         assertTrue(result);
     }
+
+    @Test
+    public void givenJsonNotAWSIAMRolePolicyFormat_whenVerifyInputJson_thenThrowIllegalArgumentException() {
+        // Given
+        String json = "not_aws_iam_role_policy_format.json";
+
+        // When, Then
+        assertThrows(IllegalArgumentException.class, () -> verifyJSON(json));
+    }
 }
