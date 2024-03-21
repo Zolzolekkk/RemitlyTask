@@ -24,14 +24,6 @@ Navigate to the project directory:
 cd RemitlyTask
 ```
 
-## Compile the Project
-
-Run the following command to compile the project using Maven:
-
-```bash
-mvn compile
-```
-
 ## Running the Application
 
 Once the project is successfully compiled, you can run the application using the following command:
