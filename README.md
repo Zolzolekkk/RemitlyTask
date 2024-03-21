@@ -21,7 +21,7 @@ git clone https://github.com/Zolzolekkk/RemitlyTask.git
 Navigate to the project directory:
 
 ```bash
-cd your-repository
+cd RemitlyTask
 ```
 
 ## Compile the Project
