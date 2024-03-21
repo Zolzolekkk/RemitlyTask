@@ -26,7 +26,7 @@ cd RemitlyTask
 
 ## Running the Application
 
-Once the project is successfully compiled, you can run the application using the following command:
+You can run the application using the following command:
 
 ```bash
 mvn exec:java -Dexec.mainClass="org.example.Main"
