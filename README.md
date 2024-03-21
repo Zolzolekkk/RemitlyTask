@@ -24,9 +24,17 @@ Navigate to the project directory:
 cd RemitlyTask
 ```
 
+## Compile the Project
+
+Run the following command to compile the project using Maven:
+
+```bash
+mvn compile
+```
+
 ## Running the Application
 
-You can run the application using the following command:
+Once the project is successfully compiled, you can run the application using the following command:
 
 ```bash
 mvn exec:java -Dexec.mainClass="org.example.Main"
