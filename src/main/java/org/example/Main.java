@@ -21,8 +21,8 @@ public class Main {
         return Thread.currentThread().getContextClassLoader().getResourceAsStream( path );
     }
 
+    // Method to check if JSON contains required fields for IAM Role policy
     private static boolean isIAMRolePolicyFormat(JsonNode rootNode) {
-        // Check if JSON contains required fields for IAM Role policy
         boolean hasVersion = rootNode.has("Version");
         boolean hasStatement = rootNode.has("Statement");
 
@@ -30,8 +30,8 @@ public class Main {
         return hasVersion && hasStatement;
     }
 
+    // Method to check if each statement has required fields (Effect, Action, Resource)
     private static boolean isValidStatement(JsonNode statementNode) {
-        // Check if each statement has required fields (Effect, Action, Resource)
         boolean hasEffect = statementNode.has("Effect");
         boolean hasAction = statementNode.has("Action");
         boolean hasResource = statementNode.has("Resource");
@@ -41,15 +41,19 @@ public class Main {
 
     // Method to get the resource node from the JSON object
     private static JsonNode getResourceNode(JsonNode rootNode) {
+        // Extract Policy Document node
         JsonNode policyDocumentNode = rootNode.at(POLICY_DOCUMENT);
 
         JsonNode statementNode;
+        // Check if Policy Document node is present
         if (!policyDocumentNode.isMissingNode()) {
+            // Verify if Policy Document node is in IAM Role policy format
             if (!isIAMRolePolicyFormat(policyDocumentNode)) {
                 throw new IllegalArgumentException("Policy document is not in IAM Role policy format");
             }
             statementNode = policyDocumentNode.at(STATEMENT);
         } else {
+            // Verify if root node is in IAM Role policy format
             if (!isIAMRolePolicyFormat(rootNode)) {
                 throw new IllegalArgumentException("Policy document is not in IAM Role policy format");
             }
@@ -57,7 +61,9 @@ public class Main {
         }
 
         JsonNode resourceNode;
+        // Check if Statement node is an array
         if (statementNode.isArray()) {
+            // Loop through each statement in the array and validate it
             for (JsonNode node : statementNode) {
                 if (!isValidStatement(node)) {
                     throw new IllegalArgumentException("Statement field is not in valid format");
@@ -70,6 +76,7 @@ public class Main {
             }
             resourceNode = statementNode.at(RESOURCE);
         }
+        // Check if Resource node is present
         if (resourceNode.isMissingNode()) {
             throw new IllegalArgumentException("Resource field not found in JSON");
         }
