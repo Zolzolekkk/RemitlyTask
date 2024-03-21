@@ -6,62 +6,48 @@ The task involves implementing a method to validate input JSON data conforming t
 
 Unit tests were created to cover possible edge cases and check if method returns correct values or throw exception if needed.
 
-# Uruchamianie Projektu w terminalu
-Aby uruchomić projekt, wykonaj następujące kroki:
+## Requirements
+- JDK 17
+- Apache Maven 4.0.0
 
-## 1. Pobierz kod źródłowy: 
-Sklonuj repozytorium na swój lokalny komputer używając polecenia git clone.
+## Installation
 
-```console
+Clone this repository to your local machine using the following command:
+
+```bash
 git clone https://github.com/Zolzolekkk/RemitlyTask.git
 ```
 
-## 2. Przejdź do katalogu projektu: 
-Użyj terminala, aby przejść do katalogu, w którym znajduje się sklonowane repozytorium.
+Navigate to the project directory:
 
-```console
+```bash
 cd RemitlyTask
 ```
-## 3. Uruchom projekt przy użyciu Maven: 
-Aby skompilować i uruchomić projekt, użyj polecenia: 
-Maven mvn exec:java.
 
-```console
+## Compile the Project
+
+Run the following command to compile the project using Maven:
+
+```bash
+mvn compile
+```
+
+## Running the Application
+
+Once the project is successfully compiled, you can run the application using the following command:
+
+```bash
 mvn exec:java -Dexec.mainClass="org.example.Main"
 ```
-## 4. Uruchom testy przy użyciu Maven: 
-Aby skompilować i uruchomić testy, użyj polecenia: 
-Maven mvn test.
 
-```console
+## Testing
+
+To execute the tests, run the following command:
+
+```bash
 mvn test
 ```
-## Wymagania:
-- Java Development Kit (JDK) (Używam JDK 17)
-- Apache Maven
 
+## Note
 
-# Uruchamianie Projektu w IntelliJ IDEA
-Aby uruchomić projekt w IntelliJ IDEA, wykonaj następujące kroki:
-
-## 1. Otwórz Projekt w IntelliJ IDEA: 
-Uruchom IntelliJ IDEA i otwórz projekt, wybierając opcję "Open" z menu głównego i wybierając katalog, w którym znajduje się projekt.
-
-## 2. Sprawdź Konfigurację: 
-Upewnij się, że konfiguracja projektu jest poprawna. Sprawdź, czy projekt jest prawidłowo rozpoznany jako projekt Maven.
-
-## 3. Wybierz Konfigurację Uruchomienia: 
-Wybierz konfigurację uruchomienia, którą chcesz użyć. Możesz wybrać istniejącą konfigurację lub utworzyć nową.
-
-## 4. Uruchom Projekt: 
-Kliknij przycisk "Run" (zielony trójkąt) w górnym prawym rogu głównego okna IntelliJ IDEA, aby uruchomić projekt.
-
-## 5. Monitoruj Wyniki: 
-Po uruchomieniu projektu, monitoruj wyniki w konsoli.
-
-## Wymagania:
-- Zainstalowany IntelliJ IDEA
-- Java Development Kit (JDK) (Używam JDK 17)
-
-## Autor
-Zofia Lenart
+If you use an IDE that supports Maven (e.g. IntelliJ IDEA), you can easily compile, run and test the application.
